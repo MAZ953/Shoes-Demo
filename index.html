@@ -3,1568 +3,1082 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NEXA TECH IT SOLUTIONS - Professional IT Services & Digital Solutions">
-    <title>GED SOLUTIONS - Professional IT Services & Digital Solutions</title>
+    <title>STRIDE - Premium Shoe Manufacturing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset and Base Styles */
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --dark: #1A1A2E;
+            --light: #F7F7F7;
+            --accent: #FFD23F;
+            --text: #2D3142;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #1e40af;
-            --secondary-color: #4c6bbf;
-            --dark-color: #1a1a1a;
-            --light-color: #f8f9fa;
-            --text-color: #333;
-            --text-light: #666;
-            --white: #fff;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-lg: 0 5px 20px rgba(0,0,0,0.15);
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--light);
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
+        /* Navigation */
+        nav {
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 80px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-        }
-
-        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
         }
 
-        .ged{
-            height: 60px;
-        
+        .logo span {
+            color: var(--primary);
         }
 
-        .nav-menu {
+        .nav-links {
             display: flex;
+            gap: 50px;
             list-style: none;
-            gap: 2rem;
-            align-items: center;
         }
 
-        .nav-menu a {
+        .nav-links a {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text);
             font-weight: 500;
+            font-size: 16px;
+            position: relative;
             transition: color 0.3s ease;
-            position: relative; /* Added for pseudo-element positioning */
-            overflow: hidden; /* Added to contain the underline animation */
         }
 
-        .nav-menu a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            right: 0; /* Starts from the right */
-            width: 0%;
-            height: 2px; /* Underline thickness */
-            background-color: #1e40af; /* Underline color */
-            transition: width 0.3s ease-out; /* Animation */
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--primary-color);
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .nav-menu a:hover::after, /* Animate on hover */
-        .nav-menu a.active::after {
-            left: 0; /* Extends to the left */
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        /* Custom style for Contact button in navigation */
-        .nav-contact-btn .btn {
-            color: var(--white);
+        .nav-links a.active {
+            color: var(--primary);
         }
 
-        .nav-contact-btn .btn :active{
-            color: var(--white)
+        .menu-toggle {
+            display: none; /* Hidden by default on larger screens */
         }
 
-        .hamburger {
+        /* Page Container */
+        .page {
             display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
+            min-height: 100vh;
+            padding-top: 100px;
+            animation: fadeIn 0.6s ease-out;
         }
 
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-color);
-            transition: all 0.3s ease;
+        .page.active {
+            display: block;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--white);
-            padding: 120px;
-            margin: auto;
-            text-align: center;
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+            margin-bottom: 100px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #004E89 0%, #1A1A2E 100%);
         }
 
-        .hero h1 {
-            font-size: 4.2rem;
-            margin-bottom: 1rem;
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--accent) 0%, transparent 50%);
+            animation: bgPulse 15s ease-in-out infinite;
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        @keyframes bgPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.15;
+            }
         }
 
-        /* Buttons */
-        .btn {
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #1e40af;
-            color: #fff;
+            padding: 18px 45px;
+            background: var(--primary);
+            color: white;
             text-decoration: none;
-            border-radius: 50px;
             font-weight: 600;
+            font-size: 16px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            border: 2px solid var(--white);
+            animation: slideUp 1s ease-out 0.6s both;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
-        .btn:hover {
+        .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            color:var(--white);
-            background: #3b82f6;
-        }
-        
-
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+            background: #ff5722;
         }
 
-        .btn-outline:hover {
-            background: var(--white);
-            color: var(--primary-color);
+        .hero-image {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            animation: float 6s ease-in-out infinite;
         }
 
-        .btn-primary {
-            background: var(--primary-color);
-            color: var(--white);
-            border: 2px solid var(--primary-color);
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-55%) rotate(5deg);
+            }
         }
 
-        /* Section Styles */
-        section {
-            padding: 5rem 0;
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4));
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Products Section */
+        .products-grid {
+            padding: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            padding: 10px 10px 10px 10px;
-            margin-top: 100px;
+            margin-bottom: 60px;
+            color: var(--dark);
+            animation: slideUp 0.8s ease-out;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .section-title span {
+            color: var(--primary);
         }
 
-        /* Grid Layouts */
-        .feature-grid,
-        .services-grid,
-        .portfolio-grid,
-        .blog-grid,
-        .team-grid,
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: scaleIn 0.6s ease-out both;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .product-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .product-desc {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about-content {
+            padding: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .about-text h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--dark);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 0.8s ease-out 0.3s both;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .stats-grid {
             display: grid;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding: 17px;
-            text-align: center;
-            justify-content: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px;
         }
 
-        .feature-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .services-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .portfolio-grid,
-        .blog-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .stats-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-
-        .team-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        /* Cards */
-        .feature-card,
-        .service-card,
-        .portfolio-item,
-        .blog-card,
-        .stat-card,
-        .team-member {
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            text-align: center;
-            justify-content: center;
-            box-shadow:0px 10px 10px rgb(115, 115, 243);
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            box-shadow:0px 10px 10px rgb(193, 193, 233);
-
-        
-        }
-
-        .feature-card:hover,
-        .service-card:hover,
-        .portfolio-item:hover,
-        .blog-card:hover,
-        .team-member:hover {
-            transform: translateY(10px);
-            border-top: 15px solid blue
-            ;
-
-        }
-
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-            animation: zoomOutTurn 0.8s ease-out;
-            transform: scale(1) rotate(0deg);
-            transform-origin: center center;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.4) rotate(8deg);
-        }
-
-        @keyframes zoomOutTurn {
-            0% {
-                transform: scale(1.5) rotate(45deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* Service Cards */
-        .service-card {
-            padding: 2.5rem;
-            border-top: 4px solid var(--primary-color);
-            text-align: center;
-        }
-
-        .service-card .service-icon {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        
-
-        .service-card2 {
-            padding: 2.5rem;
-            border-top: 4px solid var(--primary-color);
-            text-align: center;
-            width: 50%;
-            margin-left: 300px;
-        }
-
-        .service-card2 .service-icon2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-       
-
-
-        @keyframes shineGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 8px rgba(30, 64, 175, 0.6)) brightness(1);
-            }
-            50% {
-                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.9)) brightness(1.2);
-            }
-        }
-
-        .service-card:hover .web-dev-icon {
-            transform: scale(0.75) rotate(40deg);
-        }
-
-        @keyframes zoomOutTurnRight {
-            0% {
-                transform: scale(1.5) rotate(45deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-        }
-
-        .service-card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        
-
-        .service-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .service-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Portfolio Items */
-        .portfolio-item {
-            overflow: hidden;
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--white);
-        }
-
-        .portfolio-info {
-            padding: 1.5rem;
-        }
-
-        .portfolio-info h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-info p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Blog Cards */
-        .blog-card {
-            overflow: hidden;
-        }
-
-        .blog-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--white);
-        }
-
-        .blog-content {
-            padding: 1.5rem;
-        }
-
-        .blog-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .blog-content h3 {
-            margin-bottom: 1rem;
-        }
-
-        .blog-content p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .read-more {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* Stats */
         .stat-card {
             text-align: center;
-            padding: 2rem;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            animation: scaleIn 0.6s ease-out both;
         }
 
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
         .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
         }
 
         .stat-label {
-            color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
         }
 
-        /* Team Members */
-        .team-member {
-            text-align: center;
-            padding: 2rem;
+        /* Contact Section */
+        .contact-content {
+            padding: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .team-avatar {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--white);
-        }
-
-        .team-role {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Form */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            min-width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--light-color);
-            border-radius: 50%;
-        }
-
-        .contact-details h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-details p {
-            color: var(--text-light);
+            gap: 80px;
+            margin-top: 60px;
         }
 
         .contact-form {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0px 10px 10px cornflowerblue
+            animation: slideUp 0.8s ease-out;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 30px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
             font-weight: 600;
+            color: var(--dark);
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
-            padding: 0.875rem;
+            padding: 18px 20px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.3s ease;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 150px;
         }
 
-        /* Background Sections */
-        .bg-light {
-            background: var(--light-color);
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .bg-gradient {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--white);
+        .submit-btn:hover {
+            background: #ff5722;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
-        .bg-gradient .section-title,
-        .bg-gradient .section-subtitle {
-            color: var(--white);
+        .contact-info {
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.6;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-color);
-            color: var(--white);
-            padding: 3rem 0 1rem;
+            background: var(--dark);
+            color: white;
+            padding: 60px 80px 30px;
+            margin-top: 100px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
         }
 
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
+        .footer-brand h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
-        .footer-section p {
-            color: #ccc;
-            line-height: 1.8;
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
         }
 
-        .footer-section ul {
+        .footer-links h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
             list-style: none;
         }
 
-        .footer-section ul li {
-            margin-bottom: 0.75rem;
+        .footer-links ul li {
+            margin-bottom: 12px;
         }
 
-        .footer-section a {
-            color: #ccc;
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .footer-section a:hover {
-            color: var(--white);
+        .footer-links ul li a:hover {
+            color: var(--primary);
         }
 
         .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: #888;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Hidden sections for navigation */
-        .page-section {
-            display: none;
-        }
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 20px 40px;
+            }
 
-        .page-section.active {
-            display: block;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
+            .hero {
+                padding: 0 40px;
                 flex-direction: column;
-                background: cornflowerblue;
-                width: 100%;
-                text-align: left;
-                transition: 0.3s;
-                box-shadow: var(--shadow-lg);
-                padding: 2rem 0;
-                gap: 1.5rem;
+                text-align: center;
+                height: auto;
+                padding-top: 120px;
+                padding-bottom: 60px;
             }
 
-            .nav-menu.active {
-                left: 0;
+            .hero-content {
+                max-width: 100%;
             }
 
-            .hamburger {
-                display: flex;
+            .hero-content h1 {
+                font-size: 56px;
             }
 
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin-top: 40px;
+                width: 400px;
+                height: 400px;
+            }
+
+            .products-grid,
+            .about-content,
+            .contact-content {
+                padding: 60px 40px;
+            }
+
+            .about-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .hero p {
-                font-size: 1.3rem;
-            }
-
-            section {
-                padding: 2rem 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            .nav-links {
+                display: none; /* Hide regular nav links on mobile */
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                position: absolute;
+                top: 80px; /* Adjust based on nav height */
+                left: 0;
+                width: 100%;
+                padding: 20px 40px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
             }
 
-            .hero p {
-                font-size: 1rem;
+            .nav-links.active {
+                display: flex;
             }
 
-            .feature-grid,
-            .services-grid,
-            .portfolio-grid,
-            .blog-grid {
-                grid-template-columns: 1fr;
+            .nav-links li {
+                margin-bottom: 15px;
             }
 
-            .btn {
-                padding: 0.875rem 2rem;
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
+            .nav-links a {
+                font-size: 18px;
+                width: 100%;
+                display: block;
+                padding: 10px 0;
             }
 
-            .hero {
-                padding: 4rem 0;
+            .menu-toggle {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                gap: 6px;
             }
 
-            .hero h1 {
-                font-size: 1.75rem;
+            .menu-toggle .bar {
+                width: 30px;
+                height: 3px;
+                background-color: var(--dark);
+                transition: all 0.3s ease;
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
             }
 
             .section-title {
-                font-size: 1.75rem;
+                font-size: 38px;
             }
 
-            .logo {
-                font-size: 1.2rem;
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="navbar">
-                <div class="logo">GED Business Solutions</div>
-
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li class="nav-contact-btn"><a href="#contact" class="btn nav-link">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav>
+        <div class="logo">STRI<span>DE</span></div>
+        <ul class="nav-links">
+            <li><a href="#" data-page="home" class="active">Home</a></li>
+            <li><a href="#" data-page="products">Products</a></li>
+            <li><a href="#" data-page="about">About</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
 
     <!-- HOME PAGE -->
-    <div id="home" class="page-section active">
-        <!-- Hero Section -->
+    <div id="home" class="page active">
         <section class="hero">
-            <div class="container">
-                <h1>Transform Your Digital Presence</h1>
-                <p>Professional IT solutions that drive growth and innovation for your business. We create modern, scalable solutions tailored to your needs.</p>
-                <a href="#contact" class="btn nav-link">Request a Quote</a>
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Step Into Excellence</h1>
+                <p>Crafting premium footwear with precision engineering and timeless design for over 25 years.</p>
+                <a href="#" class="cta-button" data-page="products">Explore Collection</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop" alt="Premium Shoe">
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="container">
-            <h2 class="section-title">Why Businesses Choose Us</h2>
-            <p class="section-subtitle">We combine technical expertise with creative innovation to deliver exceptional results</p>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">⚡</span>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized performance and quick turnaround times for all projects ensuring your business stays ahead.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">🎨</span>
-                    <h3>Creative Excellence</h3>
-                    <p>Stunning designs that capture attention and drive engagement with your target audience.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">🔒</span>
-                    <h3>Secure & Reliable</h3>
-                    <p>Enterprise-grade security and 99.9% uptime guarantee to keep your business running smoothly.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">📱</span>
-                    <h3>Mobile First</h3>
-                    <p>Responsive designs that work flawlessly on all devices from desktop to mobile.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Preview -->
-        <section class="bg-light">
-            <div class="container">
-                <h2 class="section-title">Our Premium Services</h2>
-                <p class="section-subtitle">Comprehensive IT solutions designed to elevate your business</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <svg class="service-icon web-dev-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <defs>
-                                <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1">
-                                        <animate attributeName="stop-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-                                    </stop>
-                                </linearGradient>
-                                <radialGradient id="glowGradient" cx="50%" cy="50%">
-                                    <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.8">
-                                        <animate attributeName="stop-opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
-                                    </stop>
-                                    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1"/>
-                                </radialGradient>
-                            </defs>
-                            <circle cx="40" cy="40" r="38" fill="url(#glowGradient)"/>
-                            <circle cx="40" cy="40" r="38" fill="url(#shineGradient)" opacity="0.6"/>
-                            <path d="M25 30L20 40L25 50" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                            <path d="M55 30L60 40L55 50" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                            <path d="M40 25L40 55" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                        <h3>Web Development</h3>
-                        <p>Modern, responsive websites and web applications built with cutting-edge technologies like React, Node.js, and cloud infrastructure.
-                            <br>Website development using HTML, CSS & JavaScript.
-                            <br>Clean code and modern UI design.
-                            <br>Multi-language and scalable websites.
-                            <br>Mobile-friendly and SEO-ready.
-                            <br>Turning ideas into live websites.
-                            </p>
-                        <a href="#services" class="btn nav-link">Explore Service →</a>
+        <div class="products-grid">
+            <h2 class="section-title">Featured <span>Collection</span></h2>
+            <div class="products-container">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" alt="Running Shoe">
                     </div>
-                    
+                    <h3 class="product-name">AeroRun Pro</h3>
+                    <p class="product-desc">Lightweight running shoe with advanced cushioning technology</p>
+                    <div class="product-price">1200/-</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=300&fit=crop" alt="Casual Sneaker">
+                    </div>
+                    <h3 class="product-name">Urban Classic</h3>
+                    <p class="product-desc">Timeless design meets modern comfort for everyday wear</p>
+                    <div class="product-price">$89.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&h=300&fit=crop" alt="Basketball Shoe">
+                    </div>
+                    <h3 class="product-name">Court Master</h3>
+                    <p class="product-desc">High-performance basketball shoe with ankle support</p>
+                    <div class="product-price">$159.99</div>
                 </div>
             </div>
-        </section>
-
-
-        <!-- CTA Section -->
-        <section class="bg-gradient">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title">Ready to Transform Your Business?</h2>
-                <p class="section-subtitle">Let's discuss your project and create something amazing together</p>
-                <a href="#contact" class="btn btn-outline nav-link">Get Started Today</a>
-            </div>
-        </section>
+        </div>
     </div>
 
-    <!-- SERVICES PAGE -->
-    <div id="services" class="page-section">
-        <section class="hero">
-            <div class="container">
-                <h1>Our Services</h1>
-                <p>Comprehensive IT solutions designed to help your business succeed</p>
+    <!-- PRODUCTS PAGE -->
+    <div id="products" class="page">
+        <section class="hero" style="height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Our Collection</h1>
+                <p>Discover footwear engineered for performance, designed for style</p>
+            </div>
+            <div class="hero-image" style="width: 400px; height: 400px;">
+                <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=500&fit=crop" alt="Shoe Collection">
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">What We Offer</h2>
-            <p class="section-subtitle">Professional services tailored to meet your business needs</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <svg class="service-icon web-dev-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#1e40af;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1">
-                                    <animate attributeName="stop-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-                                </stop>
-                            </linearGradient>
-                            <radialGradient id="glowGradient" cx="50%" cy="50%">
-                                <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.8">
-                                    <animate attributeName="stop-opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
-                                </stop>
-                                <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1"/>
-                            </radialGradient>
-                        </defs>
-                        <circle cx="40" cy="40" r="38" fill="url(#glowGradient)"/>
-                        <circle cx="40" cy="40" r="38" fill="url(#shineGradient)" opacity="0.6"/>
-                        <path d="M25 30L20 40L25 50" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <path d="M55 30L60 40L55 50" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <path d="M40 25L40 55" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                    <h3>Web Development</h3>
-                    <p>Modern, responsive websites and web applications built with cutting-edge technologies like React, Node.js, and cloud infrastructure.    
-                    </p>
-                    <br>Website development using HTML, CSS & JavaScript.
-                    <br>Clean code and modern UI design.
-                    <br>Multi-language and scalable websites.
-                    <br>Mobile-friendly and SEO-ready.
-                    <br>Turning ideas into live websites.
-                    <br>Custom Website Development
-                    <br>E-Commerce Solutions
-                    <br>Web Applications
-                    <br>CMS Development
-                    <br>API Integration
+        <div class="products-grid">
+            <h2 class="section-title">All <span>Products</span></h2>
+            <div class="products-container">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" alt="Running Shoe">
+                    </div>
+                    <h3 class="product-name">AeroRun Pro</h3>
+                    <p class="product-desc">Lightweight running shoe with advanced cushioning technology</p>
+                    <div class="product-price">$129.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=300&fit=crop" alt="Casual Sneaker">
+                    </div>
+                    <h3 class="product-name">Urban Classic</h3>
+                    <p class="product-desc">Timeless design meets modern comfort for everyday wear</p>
+                    <div class="product-price">$89.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&h=300&fit=crop" alt="Basketball Shoe">
+                    </div>
+                    <h3 class="product-name">Court Master</h3>
+                    <p class="product-desc">High-performance basketball shoe with ankle support</p>
+                    <div class="product-price">$159.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop" alt="Hiking Boot">
+                    </div>
+                    <h3 class="product-name">Trail Blazer</h3>
+                    <p class="product-desc">Rugged outdoor boot built for extreme terrains</p>
+                    <div class="product-price">$179.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=300&fit=crop" alt="Formal Shoe">
+                    </div>
+                    <h3 class="product-name">Executive Elite</h3>
+                    <p class="product-desc">Premium leather dress shoe for professional settings</p>
+                    <div class="product-price">$199.99</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop" alt="Training Shoe">
+                    </div>
+                    <h3 class="product-name">FlexFit Trainer</h3>
+                    <p class="product-desc">Versatile cross-training shoe for gym and studio</p>
+                    <div class="product-price">$109.99</div>
                 </div>
             </div>
-
-            <!--<div class="services-grid">
-                <div class="service-card">
-                    <<span class="feature-icon" style="font-size: 4rem;">📄</span>
-                    <h2>Static</h2>
-                    <>p style="color: var(--text-light); margin-bottom: 2rem;">
-                        Professional non-responsive static website with free 1-year domain included!
-                    </p>
-                    
-                    <div style="text-align: left; margin: 2rem 0;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Package Includes:</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
-                                <span style="color: var(--primary-color); margin-right: 0.5rem;">✓</span>
-                                4 Pages: Home, About, Products, Contact
-                            </li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
-                                <span style="color: var(--primary-color); margin-right: 0.5rem;">✓</span>
-                                Non-Responsive Design
-                            </li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
-                                <span style="color: var(--primary-color); margin-right: 0.5rem;">✓</span>
-                                Free 1 Year Domain (.com, .in, .co.in)
-                            </li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
-                                <span style="color: var(--primary-color); margin-right: 0.5rem;">✓</span>
-                                Basic SEO Setup
-                            </li>
-                            <li style="padding: 0.5rem 0;">
-                                <span style="color: var(--primary-color); margin-right: 0.5rem;">✓</span>
-                                Contact Form Integration
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div style="text-align: left; margin: 2rem 0;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Product Listing Prices:</h3>
-                        <div style="background: var(--light-color); border-radius: 10px; padding: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 2px solid var(--primary-color);">
-                                <strong>Products Range</strong>
-                                <strong>Price</strong>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #ddd;">
-                                <span>1-10 Products</span>
-                                <span style="color: var(--primary-color); font-weight: 600;">₹7,080</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #ddd;">
-                                <span>1-20 Products</span>
-                                <span style="color: var(--primary-color); font-weight: 600;">₹11,800</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #ddd;">
-                                <span>1-30 Products</span>
-                                <span style="color: var(--primary-color); font-weight: 600;">₹15,340</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #ddd;">
-                                <span>1-40 Products</span>
-                                <span style="color: var(--primary-color); font-weight: 600;">₹17,700</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0;">
-                                <span>1-50 Products</span>
-                                <span style="color: var(--primary-color); font-weight: 600;">₹18,800</span>
-                            </div>
-                        </div>
-                        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">
-                            *All prices include GST and free domain for 1 year
-                        </p>
-                    </div>
-
-                    <div style="margin-top: 2rem;">
-                        <a href="#contact" class="btn btn-primary nav-link" style="width: 100%; text-align: center;">Order Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>-->
-
-        <section class="bg-light">
-            <div class="container">
-                <h2 class="section-title">Our Process</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">🎯</span>
-                        <h3>1. Discovery</h3>
-                        <p>Understanding your business goals and requirements</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">✏️</span>
-                        <h3>2. Planning</h3>
-                        <p>Creating a comprehensive strategy and roadmap</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🚀</span>
-                        <h3>3. Execution</h3>
-                        <p>Bringing your vision to life with expert implementation</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">✅</span>
-                        <h3>4. Delivery</h3>
-                        <p>Thorough testing and successful project launch</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-gradient">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title">Ready to Get Started?</h2>
-                <p class="section-subtitle">Contact us today for a free consultation</p>
-                <a href="#contact" class="btn btn-outline nav-link">Contact Us Now</a>
-            </div>
-        </section>
-    </div>
-
-    <!-- PORTFOLIO PAGE -->
-    <div id="portfolio" class="page-section">
-        <section class="hero">
-            <div class="container">
-                <h1>Our Portfolio</h1>
-                <p>Showcasing our best work and successful projects</p>
-            </div>
-        </section>
-
-        <section class="container">
-            <h2 class="section-title">Recent Projects</h2>
-            <p class="section-subtitle">A selection of our latest work across various industries</p>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🛒</div>
-                    <div class="portfolio-info">
-                        <h3>E-Commerce Website</h3>
-                        <p>Full-featured online store with payment integration and inventory management.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🏥</div>
-                    <div class="portfolio-info">
-                        <h3>Healthcare Portal</h3>
-                        <p>Patient management system with appointment booking and medical records.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🍕</div>
-                    <div class="portfolio-info">
-                        <h3>Restaurant Website</h3>
-                        <p>Modern responsive website with online ordering and table reservation.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🏠</div>
-                    <div class="portfolio-info">
-                        <h3>Real Estate Platform</h3>
-                        <p>Property listing website with advanced search and virtual tours.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">📚</div>
-                    <div class="portfolio-info">
-                        <h3>Educational App</h3>
-                        <p>Learning management system with video courses and assessments.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">💼</div>
-                    <div class="portfolio-info">
-                        <h3>Corporate Website</h3>
-                        <p>Professional corporate website with blog and portfolio showcase.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-light">
-            <div class="container">
-                <h2 class="section-title">Technologies We Use</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">⚛️</span>
-                        <h3>Frontend</h3>
-                        <p>React, Vue.js, Angular, HTML5, CSS3, JavaScript, TypeScript</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🔧</span>
-                        <h3>Backend</h3>
-                        <p>Node.js, Python, PHP, Laravel, Django, RESTful APIs</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">💾</span>
-                        <h3>Database</h3>
-                        <p>MySQL, PostgreSQL, MongoDB, Firebase, Redis</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">☁️</span>
-                        <h3>Cloud & DevOps</h3>
-                        <p>AWS, Google Cloud, Azure, Docker, Kubernetes</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-gradient">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title">Let's Build Something Amazing</h2>
-                <p class="section-subtitle">Ready to start your next project?</p>
-                <a href="#contact" class="btn btn-outline nav-link">Start Your Project</a>
-            </div>
-        </section>
-    </div>
-
-    <!-- BLOG PAGE 
-    <div id="blog" class="page-section">
-        <section class="hero">
-            <div class="container">
-                <h1>Our Blog</h1>
-                <p>Latest insights, tips, and trends in technology and digital marketing</p>
-            </div>
-        </section>
-
-        <section class="container">
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-image">📱</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Jan 25, 2025</span>
-                            <span>👤 Aftab Khan</span>
-                        </div>
-                        <h3>10 Web Development Trends to Watch in 2025</h3>
-                        <p>Discover the latest trends shaping the future of web development.</p>
-                    </div>
-                </div>
-                
-                <div class="blog-card">
-                    <div class="blog-image">🎯</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Jan 20, 2025</span>
-                            <span>👤 Amit Sharma</span>
-                        </div>
-                        <h3>The Ultimate Guide to SEO in 2025</h3>
-                        <p>Learn essential SEO strategies to improve your website's visibility.</p>
-                    </div>
-                </div>
-                
-                <div class="blog-card">
-                    <div class="blog-image">🎨</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Jan 15, 2025</span>
-                            <span>👤 Priya Shah</span>
-                        </div>
-                        <h3>Effective Branding: Creating a Memorable Identity</h3>
-                        <p>Explore the key elements of successful branding.</p>
-                    </div>
-                </div>
-                
-                <div class="blog-card">
-                    <div class="blog-image">☁️</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Jan 10, 2025</span>
-                            <span>👤 Rajesh Patel</span>
-                        </div>
-                        <h3>Why Your Business Needs Cloud Solutions</h3>
-                        <p>Understanding the benefits of cloud computing for your business.</p>
-                    </div>
-                </div>
-                
-                <div class="blog-card">
-                    <div class="blog-image">📊</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Jan 5, 2025</span>
-                            <span>👤 Amit Sharma</span>
-                        </div>
-                        <h3>Social Media Marketing for Small Businesses</h3>
-                        <p>Practical strategies to leverage social media platforms.</p>
-                    </div>
-                </div>
-                
-                <div class="blog-card">
-                    <div class="blog-image">🔒</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span>📅 Dec 30, 2024</span>
-                            <span>👤 Rajesh Patel</span>
-                        </div>
-                        <h3>Website Security Best Practices</h3>
-                        <p>Essential security measures to protect your website.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-light">
-            <div class="container">
-                <h2 class="section-title">Browse by Category</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">💻</span>
-                        <h3>Web Development</h3>
-                        <p>Coding, frameworks, and development best practices</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">📱</span>
-                        <h3>Digital Marketing</h3>
-                        <p>SEO, social media, and online advertising tips</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🎨</span>
-                        <h3>Design</h3>
-                        <p>UI/UX, branding, and visual design trends</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🔧</span>
-                        <h3>Technology</h3>
-                        <p>Latest tech news, tools, and innovations</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
     <!-- ABOUT PAGE -->
-    <div id="about" class="page-section">
-        <section class="hero">
-            <div class="container">
-                <h1>About Us</h1>
-                <p>Empowering businesses through innovative technology solutions since 2020</p>
+    <div id="about" class="page">
+        <section class="hero" style="height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Our Story</h1>
+                <p>Building the future of footwear, one step at a time</p>
+            </div>
+            <div class="hero-image" style="width: 400px; height: 400px;">
+                <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=500&h=500&fit=crop" alt="Manufacturing">
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Who We Are</h2>
-            <p style="max-width: 800px; margin: 0 auto 2rem; text-align: center; color: #666; line-height: 1.8;">
-                GED Business Solutions is a leading IT services company based in Rajpipla, Gujarat, specializing in web development, digital marketing, and graphic design. Founded in 2020, we have been helping businesses transform their digital presence and achieve their goals through innovative technology solutions.
-            </p>
-            <p style="max-width: 800px; margin: 0 auto; text-align: center; color: #666; line-height: 1.8;">
-                Our team of experienced professionals is passionate about delivering high-quality services that exceed client expectations. With a focus on innovation, creativity, and customer satisfaction, we have successfully completed over 150 projects for clients across various industries.
-            </p>
-        </section>
-
-        <section class="bg-light">
-            <div class="container">
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">🎯</span>
-                        <h3>Our Mission</h3>
-                        <p>To empower businesses with cutting-edge technology solutions that drive growth and create lasting value.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🔮</span>
-                        <h3>Our Vision</h3>
-                        <p>To be the most trusted IT solutions provider, recognized for excellence and innovation.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">💎</span>
-                        <h3>Our Values</h3>
-                        <p>Integrity, innovation, excellence, collaboration, and customer satisfaction guide everything we do.</p>
-                    </div>
+        <div class="about-content">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Craftsmanship Meets Innovation</h2>
+                    <p>Founded in 1998, STRIDE has been at the forefront of shoe manufacturing excellence. Our commitment to quality, sustainability, and innovation has made us a trusted name in the footwear industry.</p>
+                    <p>Every pair of shoes we create combines traditional craftsmanship with cutting-edge technology. Our master artisans work alongside engineers to ensure each product meets our exacting standards.</p>
+                    <p>From sustainable materials to ergonomic design, we're constantly pushing the boundaries of what's possible in footwear manufacturing.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=600&h=500&fit=crop" alt="Craftsmanship">
                 </div>
             </div>
-        </section>
 
-        
-
-        <section class="bg-gradient">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-subtitle">Ready to take your business to the next level?</p>
-                <a href="#contact" class="btn btn-outline nav-link">Get In Touch</a>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Shoes Manufactured</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <!-- CONTACT PAGE -->
-    <div id="contact" class="page-section">
-        <section class="hero">
-            <div class="container">
-                <h1>Contact Us</h1>
-                <p>We'd love to hear from you. Get in touch with us today!</p>
+    <div id="contact" class="page">
+        <section class="hero" style="height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Get In Touch</h1>
+                <p>We'd love to hear from you. Let's start a conversation.</p>
+            </div>
+            <div class="hero-image" style="width: 400px; height: 400px;">
+                <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=500&h=500&fit=crop" alt="Contact">
             </div>
         </section>
 
-        <section class="container">
+        <div class="contact-content">
+            <h2 class="section-title">Let's <span>Connect</span></h2>
+            
             <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Get in Touch</h2>
-                    <p style="color: #666; margin-bottom: 2rem;">Have a question or ready to start a project? We're here to help.</p>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h3>Email Us</h3>
-                            <p>contact@gedbusinesssolution.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <h3>Call Us</h3>
-                            <p>+91 9624198633 </p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h3>Visit Us</h3>
-                            <p>RAJPIPLA, NARMADA</p>
-                            <p>Gujarat - 393145, India</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">⏰</div>
-                        <div class="contact-details">
-                            <h3>Business Hours</h3>
-                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                            <p>Saturday: 10:00 AM - 4:00 PM</p>
-                        </div>
-                    </div>
-                </div>
-                
-               <!-- <div class="contact-form">
-                    <h2>Send Us a Message</h2>
-                    <form id="contactForm">
+                <div class="contact-form">
+                    <form>
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe" required>
                         </div>
-                        
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com" required>
                         </div>
-                        
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+1 (555) 123-4567">
                         </div>
-                        
                         <div class="form-group">
-                            <label for="service">Service Interested In</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="web-development">Static</option>
-                                <option value="web-development">Dynamic</option>
-                                
-
-                            </select>
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your inquiry..." required></textarea>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Your Message *</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        <button type="submit" class="submit-btn">Send Message</button>
                     </form>
                 </div>
-            </div>
-        </section>-->
 
-        <section class="bg-light">
-            <div class="container">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <div class="feature-grid" style="grid-template-columns: 1fr;">
-                    <div class="feature-card" style="text-align: left;">
-                        <h3>How long does a typical project take?</h3>
-                        <p>Project timelines vary based on scope. A basic website takes 2-4 weeks, while complex applications can take 2-3 months.</p>
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>Visit Our Headquarters</h3>
+                        <p>123 Innovation Drive<br>Tech Valley, CA 94025<br>United States</p>
                     </div>
-                    
-                    <div class="feature-card" style="text-align: left;">
-                        <h3>What is your pricing model?</h3>
-                        <p>We offer flexible pricing based on project requirements. Contact us for a detailed quote tailored to your needs.</p>
+                    <div class="info-card">
+                        <h3>Contact Information</h3>
+                        <p>Phone: +1 (800) 555-SHOE<br>Email: info@stride.com<br>Fax: +1 (800) 555-0199</p>
                     </div>
-                    
-                    <div class="feature-card" style="text-align: left;">
-                        <h3>Do you provide ongoing support?</h3>
-                        <p>Yes! We offer comprehensive maintenance and support packages to ensure your website continues to run smoothly.</p>
+                    <div class="info-card">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GED BUSINESS SOLUTIONS</h3>
-                    <p>Professional IT solutions company offering web development, digital marketing, and graphic design services to help businesses thrive in the digital age.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#services" class="nav-link">Web Development</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="#about" class="nav-link">About Us</a></li>
-                        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                        <li><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul>
-                        <li>📧 contact@gedbusinesssolutions.com</li>
-                        <li>📍 Rajpipla, Narmada, Gujarat - 393145</li>
-                        <li>📱 +91 9624198633</li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>STRIDE</h3>
+                <p>Crafting premium footwear with precision engineering and timeless design. Your journey begins with the perfect step.</p>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 gedbusinesssolution . All rights reserved.</p>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
             </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Casual</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">Formal</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 STRIDE. All rights reserved. Designed with passion for excellence.</p>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
         // Page Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pageSections = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const pages = document.querySelectorAll('.page');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                const targetPage = link.getAttribute('data-page');
                 
-                // Close mobile menu
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                
-                // Get target page
-                const targetId = link.getAttribute('href').substring(1);
-                
-                // Hide all sections
-                pageSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show target section
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
-                
-                // Update active nav link
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Update active states
+                navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
                 
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Hide mobile menu after click
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+
+                // Show target page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === targetPage) {
+                        page.classList.add('active');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
             });
         });
 
-        // Form Validation
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
+        // CTA Button navigation
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const message = document.getElementById('message').value.trim();
-                
-                if (name === '' || email === '' || message === '') {
-                    alert('Please fill in all required fields.');
-                    return;
+                const targetPage = button.getAttribute('data-page');
+                if (targetPage) {
+                    const targetLink = document.querySelector(`[data-page="${targetPage}"]`);
+                    if (targetLink) targetLink.click();
                 }
-                
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    alert('Please enter a valid email address.');
-                    return;
-                }
-                
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
             });
-        }
+        });
 
-        // Smooth Scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && !this.classList.contains('nav-link')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target && target.offsetParent !== null) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            e.target.reset();
         });
     </script>
 </body>
+
 </html>
